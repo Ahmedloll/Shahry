@@ -1,28 +1,55 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Header :user="user"></Header>
+    <Reviews></Reviews>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+  import axios from "axios";
+  import Header from "./components/Header";
+  import Reviews from "./components/Reviews";
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  export default {
+    name: "App",
+    data() {
+      return { user: { name: {}, picture: {} } };
+    },
+    methods: {},
+    components: { Header, Reviews },
+    mounted() {
+      axios
+        .get("https://randomuser.me/api/")
+        .then((response) => (this.user = response.data.results[0]));
+    },
+  };
 </script>
 
+<style scoped></style>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  body {
+    background-color: #f8f9fa;
+
+    margin: 0;
+  }
+  .container {
+    display: flex;
+  }
+  .sp-btween {
+    justify-content: space-between;
+  }
+  .sp-center {
+    justify-content: center;
+  }
+  .sp-around {
+    justify-content: space-around;
+  }
+  .avatar {
+    height: 54.4px;
+    border-radius: 50%;
+  }
+  .center {
+    text-align: center;
+  }
 </style>
