@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header :user="user"></Header>
-    <Reviews></Reviews>
+    <Reviews :user="user"></Reviews>
   </div>
 </template>
 
@@ -51,5 +51,21 @@
   }
   .center {
     text-align: center;
+  }
+  .left {
+    text-align: left;
+  }
+  button {
+    cursor: pointer;
+  }
+
+  .green-button {
+    background-color: #00be95;
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 4px;
+    font-weight: 600;
+    margin-bottom: 60px;
   }
 </style>

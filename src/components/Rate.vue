@@ -1,5 +1,5 @@
 <template>
-  <div class="container rate-box sp-center">
+  <div class="container sp-center">
     <div v-if="thumbsup" class="thumbs thumbs-up">
       <span><i class="fas fa-thumbs-up"></i></span>
     </div>
@@ -7,7 +7,7 @@
       <span><i class="fas fa-thumbs-down"></i></span>
     </div>
     <div class="container sp-around rating-container">
-      <ul class="list">
+      <ul>
         <li
           v-for="star in 5"
           :class="{ active: star <= rate }"
@@ -44,8 +44,7 @@
 
     min-width: 122px;
   }
-  .rate-box {
-  }
+
   ul {
     display: flex;
     list-style: none;
@@ -56,7 +55,7 @@
     margin-right: 10px;
   }
   .active {
-    color: yellow;
+    color: rgb(238, 217, 27);
   }
   .thumbs {
     color: white;
@@ -69,5 +68,4 @@
   .thumbs-down {
     background-color: #f12222;
   }
-
 </style>
