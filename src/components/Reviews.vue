@@ -27,7 +27,7 @@
               </div>
               <GetRate
                 @rated="rated"
-                :grade="0"
+                :grade="1"
                 :maxStars="5"
                 :hasCounter="false"
               ></GetRate>

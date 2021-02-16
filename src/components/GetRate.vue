@@ -30,9 +30,9 @@
     methods: {
       rate(star) {
         if (typeof star === "number" && star <= this.maxStars && star >= 0) {
-          this.stars = this.stars === star ? star - 1 : star;
-          this.$emit("rated", this.stars);
+          this.stars = this.stars === star && this.stars != 1 ? star - 1 : star;
         }
+        this.$emit("rated", this.stars);
       },
     },
   };
@@ -41,14 +41,14 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .rating {
-    display: flex;
+    color: #b7b7b7;
+    /* display: flex;
     flex-direction: column;
     align-items: center;
     padding: 50px;
-    color: #b7b7b7;
     background: #fff;
     border-radius: 8px;
-    box-shadow: 0 6px 33px rgba(19, 18, 18, 0.09);
+    box-shadow: 0 6px 33px rgba(19, 18, 18, 0.09); */
   }
   .rating .list {
     padding: 0;
@@ -61,8 +61,8 @@
 
   .rating .list .star {
     display: inline-block;
-    font-size: 42px;
-    transition: all 0.2s ease-in-out;
+    font-size: 25px;
+    transition: all 0.3s ease-in-out;
     cursor: pointer;
   }
   .rating .list .star:hover .star:not(.active) {
