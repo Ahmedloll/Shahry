@@ -255,6 +255,7 @@
   }
   form button {
     width: 46%;
+    min-width: fit-content;
   }
   .close i {
     line-height: 67.03px;
