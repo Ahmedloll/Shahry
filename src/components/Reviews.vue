@@ -115,7 +115,7 @@
           "November",
           "December",
         ];
-        return `${new Date().getDay()} ${
+        return `${new Date().getDate()} ${
           monthNames[new Date().getMonth()]
         } ${new Date().getFullYear()}`;
       },
