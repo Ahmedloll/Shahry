@@ -23,7 +23,7 @@
 </script>
 
 <style scoped>
-  @media only screen and (min-width: 364px) {
+  @media only screen and (min-width: 375px) {
     header {
       display: flex;
     }
