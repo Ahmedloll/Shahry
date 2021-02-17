@@ -1,5 +1,5 @@
 <template>
-  <header class="container sp-btween">
+  <header class="sp-btween">
     <div>
       <a href="#"
         ><img
@@ -10,7 +10,7 @@
 
     <div class="container">
       <img class="avatar" :src="user.picture.large" alt="user" />
-      <div>{{ user.name.first + " " + user.name.last }}</div>
+      <div>{{ `${user.name.first} ${user.name.last}` }}</div>
     </div>
   </header>
 </template>
@@ -23,6 +23,12 @@
 </script>
 
 <style scoped>
+  @media only screen and (min-width: 364px) {
+    header {
+      display: flex;
+    }
+  }
+
   header {
     background-color: white;
     width: 85%;
@@ -39,6 +45,6 @@
   img.avatar + div {
     line-height: 54.4px;
     font-weight: 600;
-    font-size: 20px;
+    font-size: 0.9em;
   }
 </style>

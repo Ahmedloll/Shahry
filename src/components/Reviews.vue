@@ -130,7 +130,7 @@
         db.collection("comments").add({
           key: this.key,
           picture: this.user.picture.large,
-          name: this.user.name.first + " " + this.user.name.last,
+          name: `${this.user.name.first} ${this.user.name.last}`,
           title: this.reviewTitle,
           date: this.getdate,
           review: this.review,
@@ -180,12 +180,25 @@
 </script>
 
 <style scoped>
+  @media only screen and (min-width: 820px) {
+    .reviews-heading {
+      height: 390px;
+    }
+  }
+  @media only screen and (max-width: 820px) and (min-width: 340px) {
+    .reviews-heading {
+      height: 490px;
+    }
+  }
+  @media only screen and (max-width: 340px) {
+    .reviews-heading {
+      height: 590px;
+    }
+  }
   .reviews-heading {
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
       url("https://images.unsplash.com/photo-1540340061722-9293d5163008?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1051&q=80");
-
     background-size: cover;
-    height: 390px;
     padding: 0px 7.5%;
     padding-top: 25px;
   }

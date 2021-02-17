@@ -73,7 +73,11 @@
   }
   .rev-avatar {
     margin-top: -64px;
+    margin-bottom: 20px;
     border-radius: 50%;
+    width: 39%;
+    max-width: 128px;
+    min-width: 90px;
   }
   .name {
     color: #007bff;

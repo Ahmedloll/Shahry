@@ -42,7 +42,7 @@
     border: 1px solid lightblue;
     border-left: none;
     color: dimgray;
-    min-width: 122px;
+    min-width: 130px;
   }
 
   ul {
