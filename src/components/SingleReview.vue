@@ -2,15 +2,14 @@
   <div class="single-review">
     <img :src="comment.picture" alt="avatar" class="rev-avatar" />
     <div class="name">{{ comment.name }}</div>
-    <div>{{ comment.date }}</div>
+    <div class="date">{{ comment.date }}</div>
     <h2>{{ comment.title }}</h2>
     <Rate :rate="comment.rating"></Rate>
     <p>{{ comment.review }}</p>
     <Comment
       v-for="comment in comment.replys"
-      :key="comment"
+      :key="comment.reply"
       :comment="comment"
-      :user="user"
     ></Comment>
 
     <div v-if="addCommentarea" class="left">
@@ -55,7 +54,8 @@
           this.addCommentarea = !this.addCommentarea;
         }
       },
-      pushcomment(reply) {
+      pushcomment(message) {
+        let reply = { img: this.user.picture.large, reply: message };
         this.comment.replys.push(reply);
         this.$emit("gotreply", this.comment);
       },
@@ -77,6 +77,11 @@
   }
   .name {
     color: #007bff;
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .date {
+    color: darkgrey;
   }
   p {
     padding: 20px 0px;

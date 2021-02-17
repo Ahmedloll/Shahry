@@ -38,5 +38,7 @@
   }
   img.avatar + div {
     line-height: 54.4px;
+    font-weight: 600;
+    font-size: 20px;
   }
 </style>

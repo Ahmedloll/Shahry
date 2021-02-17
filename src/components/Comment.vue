@@ -1,21 +1,20 @@
 <template>
   <div class="comment">
     <p class="left">
-      {{ comment }}
+      {{ comment.reply }}
     </p>
-    <img :src="user.picture.large" alt="" />
+    <img :src="comment.img" alt="" />
   </div>
 </template>
 <script>
   export default {
     name: "Comment",
-    props: ["comment", "user"],
+    props: ["comment"],
   };
 </script>
 
 <style scoped>
   .comment {
-    width: 100%;
     position: relative;
     background-color: #c2c4c956;
     border-radius: 3px;

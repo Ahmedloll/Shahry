@@ -30,8 +30,8 @@
 <style>
   body {
     background-color: #f8f9fa;
-
     margin: 0;
+    font-family: "Open Sans", sans-serif;
   }
   .container {
     display: flex;
@@ -57,6 +57,7 @@
   }
   button {
     cursor: pointer;
+    font-family: "Open Sans", sans-serif;
   }
 
   .green-button {
@@ -67,5 +68,8 @@
     border-radius: 4px;
     font-weight: 600;
     margin-bottom: 60px;
+  }
+  textarea {
+    resize: none;
   }
 </style>

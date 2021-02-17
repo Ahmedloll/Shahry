@@ -20,12 +20,13 @@
         <div class="modal-mask">
           <div class="modal-wrapper">
             <form @submit.prevent="onFormSubmit" action="">
-              <div class="container sp-btween">
+              <div class="container sp-btween form-title">
                 <h2>ADD A REVIEW</h2>
                 <div class="close" @click="closeClicked">
                   <i class="fas fa-times"></i>
                 </div>
               </div>
+
               <GetRate
                 @rated="rated"
                 :grade="1"
@@ -49,7 +50,9 @@
                 rows="10"
                 required
               ></textarea>
-              <button class="green-button" type="submit">ADD REVIEW</button>
+              <div class="button-wrapper">
+                <button class="green-button" type="submit">ADD REVIEW</button>
+              </div>
             </form>
           </div>
         </div>
@@ -96,6 +99,27 @@
     },
     props: ["user"],
     components: { SingleReview, GetRate },
+    computed: {
+      getdate() {
+        const monthNames = [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December",
+        ];
+        return `${new Date().getDay()} ${
+          monthNames[new Date().getMonth()]
+        } ${new Date().getFullYear()}`;
+      },
+    },
     methods: {
       addReviewClicked() {
         this.addReviewForm = true;
@@ -108,7 +132,7 @@
           picture: this.user.picture.large,
           name: this.user.name.first + " " + this.user.name.last,
           title: this.reviewTitle,
-          date: "10 Dec 2020",
+          date: this.getdate,
           review: this.review,
           rating: this.rate,
           replys: [],
@@ -168,6 +192,7 @@
   h1 {
     color: white;
     margin-bottom: 60px;
+    font-size: 45px;
   }
   .white-button {
     background-color: white;
@@ -192,10 +217,31 @@
     border-radius: 3px;
     box-shadow: 0px 0px 5px 2px lightgrey;
     padding: 0px 40px;
+    color: darkgrey;
+  }
+  h2 {
+    color: black;
+    font-size: 20px;
+  }
+  .form-title {
+    border-bottom: 1px solid darkgrey;
   }
   input,
   textarea {
-    margin-bottom: 20px;
+    background-color: #c2c4c956;
+    border: none;
+    border-radius: 3px;
+    margin-bottom: 30px;
+    padding: 5px;
+  }
+  input {
+    height: 25px;
+  }
+  .button-wrapper {
+    text-align: right;
+  }
+  form button {
+    width: 46%;
   }
   .close i {
     line-height: 67.03px;

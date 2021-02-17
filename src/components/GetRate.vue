@@ -1,5 +1,6 @@
 <template>
   <div class="rating">
+    <div>RATING</div>
     <ul class="list">
       <li
         @click="rate(star)"
@@ -35,6 +36,9 @@
         this.$emit("rated", this.stars);
       },
     },
+    created() {
+      this.$emit("rated", this.stars);
+    },
   };
 </script>
 
@@ -42,13 +46,7 @@
 <style scoped>
   .rating {
     color: #b7b7b7;
-    /* display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 50px;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 6px 33px rgba(19, 18, 18, 0.09); */
+    margin: 20px 0;
   }
   .rating .list {
     padding: 0;

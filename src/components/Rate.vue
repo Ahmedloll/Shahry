@@ -41,7 +41,7 @@
   .rating-container {
     border: 1px solid lightblue;
     border-left: none;
-
+    color: dimgray;
     min-width: 122px;
   }
 
@@ -53,6 +53,7 @@
   ul + div {
     line-height: 52.8px;
     margin-right: 10px;
+    font-weight: bold;
   }
   .active {
     color: rgb(238, 217, 27);
