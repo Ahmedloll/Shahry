@@ -7,7 +7,7 @@
     <Rate :rate="comment.rating"></Rate>
     <p>{{ comment.review }}</p>
     <Comment
-      v-for="comment in comments"
+      v-for="comment in comment.replys"
       :key="comment"
       :comment="comment"
       :user="user"
@@ -33,7 +33,10 @@
   import Comment from "./Comment";
   export default {
     data() {
-      return { addCommentarea: false, message: "", comments: [] };
+      return {
+        addCommentarea: false,
+        message: "",
+      };
     },
     name: "SingleReview",
     props: ["comment", "user"],
@@ -52,8 +55,9 @@
           this.addCommentarea = !this.addCommentarea;
         }
       },
-      pushcomment(comment) {
-        this.comments.push(comment);
+      pushcomment(reply) {
+        this.comment.replys.push(reply);
+        this.$emit("gotreply", this.comment);
       },
     },
   };

@@ -9,6 +9,7 @@
     <div class="reviews">
       <SingleReview
         :user="user"
+        @gotreply="gotreply"
         v-for="comment in comments"
         :key="comment.key"
         :comment="comment"
@@ -60,6 +61,27 @@
 <script>
   import SingleReview from "./SingleReview";
   import GetRate from "./GetRate";
+  import firebase from "firebase/app";
+
+  // Your web app's Firebase configuration
+  require("firebase/firestore");
+  var firebaseConfig = {
+    apiKey: "AIzaSyB46a4ykjrCLir_l3ec8xYgN3RaZjKq39Y",
+    authDomain: "shahry-e8191.firebaseapp.com",
+    projectId: "shahry-e8191",
+    storageBucket: "shahry-e8191.appspot.com",
+    messagingSenderId: "1067756679074",
+    appId: "1:1067756679074:web:2324c944dfc96777224cfb",
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  var db = firebase.firestore();
+
+  db.settings({
+    timestampsInSnapshots: true,
+  });
+
   export default {
     name: "Reviews",
     data() {
@@ -69,48 +91,7 @@
         addReviewForm: false,
         rate: "",
         key: "",
-        comments: [
-          {
-            key: 0,
-            picture: "https://randomuser.me/api/portraits/women/71.jpg",
-            name: "Teresa Evans",
-            title: "Best App Ever",
-            date: "10 Dec 2020",
-            review:
-              "Shahty is The best product company service I have ever encountered in my entire life. Its beyond words! Always good support. Very rigid security (make sure device is paired always, and they have the most professional, friendly support teams by a long shot! Super happy to be onboard with such a progressive brand!",
-            rating: 4,
-          },
-          {
-            key: 1,
-            picture: "https://randomuser.me/api/portraits/men/68.jpg",
-            name: "Liam Scott",
-            title: "I didn't like it",
-            date: "10 Dec 2020",
-            review:
-              "Shahty is The best product company service I have ever encountered in my entire life. Its beyond words! Always good support. Very rigid security (make sure device is paired always, and they have the most professional, friendly support teams by a long shot! Super happy to be onboard with such a progressive brand!",
-            rating: 1,
-          },
-          {
-            key: 2,
-            picture: "https://randomuser.me/api/portraits/women/6.jpg",
-            name: "Cathy Crawford",
-            title: "Good",
-            date: "10 Dec 2020",
-            review:
-              "Shahty is The best product company service I have ever encountered in my entire life. Its beyond words! Always good support. Very rigid security (make sure device is paired always, and they have the most professional, friendly support teams by a long shot! Super happy to be onboard with such a progressive brand!",
-            rating: 3,
-          },
-          {
-            key: 3,
-            picture: "https://randomuser.me/api/portraits/men/77.jpg",
-            name: "Carter Park",
-            title: "Best App Ever",
-            date: "10 Dec 2020",
-            review:
-              "Shahty is The best product company service I have ever encountered in my entire life. Its beyond words! Always good support. Very rigid security (make sure device is paired always, and they have the most professional, friendly support teams by a long shot! Super happy to be onboard with such a progressive brand!",
-            rating: 4,
-          },
-        ],
+        comments: [],
       };
     },
     props: ["user"],
@@ -121,8 +102,8 @@
       },
 
       onFormSubmit() {
-        this.key = this.comments.length + 1;
-        this.comments.unshift({
+        this.key = this.comments.length;
+        db.collection("comments").add({
           key: this.key,
           picture: this.user.picture.large,
           name: this.user.name.first + " " + this.user.name.last,
@@ -130,6 +111,7 @@
           date: "10 Dec 2020",
           review: this.review,
           rating: this.rate,
+          replys: [],
         });
         this.addReviewForm = false;
         this.reviewTitle = "";
@@ -143,6 +125,32 @@
       rated(rate) {
         this.rate = rate;
       },
+      gotreply(comment) {
+        db.collection("comments")
+          .where("key", "==", comment.key)
+          .get()
+          .then((query) => {
+            query.forEach((doc) => {
+              db.collection("comments")
+                .doc(doc.id)
+                .update({ replys: comment.replys });
+            });
+          });
+      },
+      fetchcomments() {
+        db.collection("comments")
+          .orderBy("key")
+          .onSnapshot((querySnapshot) => {
+            let allcomments = [];
+            querySnapshot.forEach((doc) => {
+              allcomments.push(doc.data());
+            });
+            this.comments = allcomments.reverse();
+          });
+      },
+    },
+    created() {
+      this.fetchcomments();
     },
   };
 </script>
